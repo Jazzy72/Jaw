@@ -1,19 +1,34 @@
-.profile{
+.profile {
     min-height: 100vh;
-    background: url(/background.png) no-repeat;
+    background: url(/bg.png) no-repeat;
     background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative; /* Make sure the profile container is positioned relative */
 }
-.profile-container{
+
+.profile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% transparency */
+    z-index: 1; /* Place this layer behind the content */
+}
+
+.profile-container {
     background: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
     min-width: 700px;
     border-radius: 10px;
+    z-index: 2; /* Ensure the content is above the overlay */
 }
+ /**/
 .profile-pic{
     max-width: 160px;
     aspect-ratio: 1/1;
@@ -25,6 +40,7 @@
     flex-direction: column;
     gap: 20px;
     padding: 40px;
+    z-index: 3;
 }
 .profile-form h3{
     font-weight: 500;
@@ -45,12 +61,12 @@
     padding: 10px;
     min-width: 300px;
     border: 1px solid #c9c9c9;
-    outline-color: #077eff;
+    outline-color: black;
 }
 .profile form button{
     border: none;
     color: white;
-    background-color: #077eff;
+    background-color: black;
     padding: 8px;
     font-size: 16px;
     cursor: pointer;
