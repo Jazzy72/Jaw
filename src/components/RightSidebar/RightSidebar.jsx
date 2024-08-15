@@ -1,71 +1,14 @@
-// import React, { useContext, useEffect, useState } from 'react'
-// import './RightSidebar.css'
-// import assets from '../../assets/assets'
-// import { logout } from '../../config/firebase'
-// import { AppContext } from '../../context/AppContext'
-
-// const RightSidebar = () => {
-
-//   const {chatUser,messages} = useContext(AppContext);
-//   const [msgImages,setMsgImages] = useState([]);
-
-//   useEffect(()=>{
-//     let tempVar = [];
-//     messages.map((msg)=>{
-//       if (msg.image) {
-//         tempVar.push(msg.image)
-//       }
-//     })
-//     setMsgImages(tempVar);
-//   },[messages])
-
-//   return chatUser ? (
-//     <div className='rs'>
-//       <div className="rs-profile">
-//         <img src={chatUser.userData.avatar} alt="" />
-//         <h3>{Date.now() - chatUser.userData.lastSeen <= 70000 ? <img src={assets.green_dot} className='dot' alt="" /> : null} {chatUser.userData.name}</h3>
-//         <p>{chatUser.userData.bio}</p>
-//       </div>
-//       <hr />
-//       <div className="rs-media">
-//         <p>Media</p>
-//         <div>
-//           {msgImages.map((url,index)=>(<img onClick={()=>window.open(url)} key={index} src={url} alt='' />))}
-
-//           {/* <img src={assets.pic1} alt="" />
-//           <img src={assets.pic2} alt="" />
-//           <img src={assets.pic3} alt="" />
-//           <img src={assets.pic4} alt="" />
-//           <img src={assets.pic1} alt="" />
-//           <img src={assets.pic2} alt="" /> */}
-//         </div>
-//       </div>
-//       <button onClick={()=>logout()}>Logout</button>
-//     </div>
-//   )
-//   : (
-//     <div className='rs'>
-//       <button onClick={()=>logout()} >Logout</button>
-//     </div>
-//   )
-// }
-
-// export default RightSidebar
-
-
-
-
-
-
 import React, { useContext, useEffect, useState } from 'react';
 import './RightSidebar.css';
 import assets from '../../assets/assets';
 import { logout } from '../../config/firebase';
 import { AppContext } from '../../context/AppContext';
+import { useNavigate } from 'react-router-dom';
 
 const RightSidebar = () => {
   const { chatUser, messages, userData } = useContext(AppContext);
   const [msgImages, setMsgImages] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let tempVar = [];
@@ -76,6 +19,10 @@ const RightSidebar = () => {
     });
     setMsgImages(tempVar);
   }, [messages]);
+
+  const handleEditProfile = () => {
+    navigate('/profile'); // Assuming /profile-update is the route for editing the profile
+  };
 
   return (
     <div className='rs'>
@@ -90,20 +37,23 @@ const RightSidebar = () => {
         <p>{chatUser ? chatUser.userData.bio : userData.bio}</p>
       </div>
       <hr />
-      <div className="rs-media">
-        <p>Media</p>
-        <div>
-          {msgImages.map((url, index) => (
-            <img onClick={() => window.open(url)} key={index} src={url} alt='' />
-          ))}
+      {chatUser ? (
+        <div className="rs-media">
+          <p>Media</p>
+          <div>
+            {msgImages.map((url, index) => (
+              <img onClick={() => window.open(url)} key={index} src={url} alt='' />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <button onClick={handleEditProfile} className='edit-profile-btn'>
+          Edit Profile
+        </button>
+      )}
       <button onClick={() => logout()}>Logout</button>
     </div>
   );
 };
 
 export default RightSidebar;
-
-
-
