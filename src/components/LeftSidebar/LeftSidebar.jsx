@@ -107,7 +107,7 @@ const LeftSidebar = () => {
         <div className='ls'>
             <div className="ls-top">
                 <div className="ls-nav">
-                    <img src={assets.lg_side} className='logo' alt="" />
+                    <img src={assets.lg_side1} className='logo' alt="" />
                     <div className="menu">
                         {/* <img src={assets.menu_icon} alt="" /> */}
                         <FontAwesomeIcon icon={faEllipsisVertical} />
