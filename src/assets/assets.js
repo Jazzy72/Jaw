@@ -17,6 +17,7 @@ import arrow_icon from './arrow_icon.png'
 import green_dot from './green_dot.png'
 import lg from './lg.png'
 import lg_side from './lg_side.jpg'
+import lg_side1 from './lg_side1.png'
 
 const assets = {
     avatar_icon,
@@ -37,7 +38,8 @@ const assets = {
     arrow_icon,
     green_dot,
     lg,
-    lg_side
+    lg_side,
+    lg_side1
 }
 
 export default assets;
