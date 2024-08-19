@@ -66,6 +66,13 @@
     cursor: pointer;
     font-size: 13px;
 }
+.friends.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid aliceblue;
+}
+.friends p{
+    color: #FFFFFF;
+}
 .friends div{
     display: flex;
     flex-direction: column;
@@ -76,56 +83,73 @@
     font-style: normal;
 }
 .friends span{
-    color: white;
+    color: #575757;
     font-size: 11px;
+    /**/
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: italic;
 }
 .friends:hover{
-    border: 1px solid white;
-    border-radius: 10px;
+    border: 1px solid aliceblue;
+    border-radius: 20px;
 }
-/* .friends:hover span{
-    color: white;
-} */
 .ls-nav .menu{
     position: relative;
     padding: 10px 0px;
 }
-.menu{
+
+ .menu {
+    position: relative;
+    padding: 10px 0px;
     color: white;
+    cursor: pointer;
 }
-.menu .sub-menu{
+
+.menu .sub-menu {
     position: absolute;
-    top: 15px;
-    right: 0;
-    width: 130px;
-    padding: 20px;
+    top: 14px;
+    left: 40px;
+    display: flex;
+    gap: 10px; 
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     border-radius: 5px;
     background-color: white;
     color: black;
-    display: none;
     border: 1px solid black;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 5s ease;
+    z-index: 5;
 }
 
-.sub-menu hr{
-    border: none;
-    height: 1px;
-    background: #a4a4a4;
-    margin: 8px 0px;
+.menu:hover .sub-menu,
+.menu .sub-menu:hover {
+    opacity: 1;
+    visibility: visible;
 }
-.sub-menu p{
-    cursor: pointer;
-    font-size: 14px;
+
+.menu:hover .sub-menu {
+    transition-delay: 0.5s; /* Delay before hiding submenu */
 }
-.menu:hover .sub-menu{
-    display: block;
+
+.menu .sub-menu {
+    transform: translateY(-10px);
 }
+
+.menu:hover .sub-menu {
+    transform: translateY(0);
+}
+ /**/
+
 .friends.border img{
     border: 2px solid white;
 }
 .friends.border div span{
     color: white;
 }
-/**/
 .friends.border div span:hover{
     color: white;
 }
