@@ -14,29 +14,30 @@
     height: 100%;
     max-width: 100%;
     max-height: 100vh; 
-    /* background-color: aliceblue; */
     background-color: #FFFFFF;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
 }
 
-.loading {
-    font-size: 50px;
-    color: white;
-    text-align: center; 
-    grid-column: 1 / -1; 
-    align-self: center; 
-    animation: spin 1s linear infinite;
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full screen height */
+  grid-column: 1 / -1; /* Ensure the loader takes full width */
 }
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #282828; /* Color for the loading bar */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
 @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
+  to {
       transform: rotate(360deg);
-    }
   }
-  
-  .loading .fa-spinner {
-    margin-right: 8px; /* Add some spacing between the icon and text */
-  }
+}
