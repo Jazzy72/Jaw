@@ -7,7 +7,7 @@ import { db } from '../../config/firebase';
 import { AppContext } from '../../context/AppContext';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisVertical, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical, faHouseUser, faMagnifyingGlass, faPowerOff, faSpinner, faUser } from '@fortawesome/free-solid-svg-icons';
 
 
 const LeftSidebar = () => {
@@ -92,13 +92,13 @@ const LeftSidebar = () => {
     const setChat = async (item) => {
         setMessagesId(item.messageId);
         setChatUser(item);
-        const userChatsRef = doc(db,'chats',userData.id);
+        const userChatsRef = doc(db, 'chats', userData.id);
         const userChatsSnapShot = await getDoc(userChatsRef);
         const userChatsData = userChatsSnapShot.data();
-        const chatIndex = userChatsData.chatsData.findIndex((c)=>c.messageId === item.messageId);
+        const chatIndex = userChatsData.chatsData.findIndex((c) => c.messageId === item.messageId);
         userChatsData.chatsData[chatIndex].messageSeen = true;
-        await updateDoc(userChatsRef,{
-            chatsData:userChatsData.chatsData
+        await updateDoc(userChatsRef, {
+            chatsData: userChatsData.chatsData
         })
         // setChatVisible(true);
     };
@@ -107,17 +107,33 @@ const LeftSidebar = () => {
         <div className='ls'>
             <div className="ls-top">
                 <div className="ls-nav">
-                    <img src={assets.lg_side1} className='logo' alt="" />
+                    <img
+                        src={assets.lg_side1}
+                        className='logo'
+                        alt=""
+                        /* */
+                        onClick={() => {
+                            navigate('/chat');
+                            setChatUser(null);
+                            setMessagesId(null);
+                        }}
+                    />
                     <div className="menu">
-                        {/* <img src={assets.menu_icon} alt="" /> */}
                         <FontAwesomeIcon icon={faEllipsisVertical} />
+                    
                         <div className="sub-menu">
-                            <p onClick={() => navigate('/profile')}>Edit Profile</p>
+                            <p onClick={() => navigate('/profile')}><FontAwesomeIcon icon={faUser} />Profile</p>
                             <hr />
-                            <p>Logout</p>
+                            <p onClick={() => navigate('/')}><FontAwesomeIcon icon={faPowerOff} />Logout</p>
                         </div>
                     </div>
+
                 </div>
+
+
+                 
+                
+
                 <div className="ls-search">
                     {/* <img src={assets.search_icon} alt="" /> */}
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -131,7 +147,11 @@ const LeftSidebar = () => {
                         <p>{user.name}</p>
                     </div>
                     : chatData && chatData.length > 0 ? chatData.map((item, index) => (
-                        <div onClick={() => setChat(item)} key={index} className={`friends ${item.messageSeen || item.messageId === messagesId ? "" :"border"}`}>
+                        <div
+                            onClick={() => setChat(item)}
+                            key={index}
+                            // className={`friends ${item.messageSeen || item.messageId === messagesId ? "" : "border"}`}>
+                            className={`friends ${item.messageSeen || item.messageId === messagesId ? "" : "border"} ${item.messageId === messagesId ? "active" : ""}`}>
                             <img src={item.userData.avatar} alt="" />
                             <div>
                                 <p>{item.userData.name}</p>
@@ -146,9 +166,4 @@ const LeftSidebar = () => {
 };
 
 export default LeftSidebar;
-
-
-
-
-
 
